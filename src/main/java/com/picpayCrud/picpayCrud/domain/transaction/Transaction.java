@@ -1,6 +1,6 @@
 package com.picpayCrud.picpayCrud.domain.transaction;
 
-import com.picpayCrud.picpayCrud.domain.user.User;
+import com.picpayCrud.picpayCrud.domain.user.UserModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -23,10 +23,10 @@ public class Transaction {
     private BigDecimal amount; //valor da transação
     @ManyToOne
     @JoinColumn(name="sender_id")
-    private User sender;
+    private UserModel sender;
     @ManyToOne
     @JoinColumn(name="receiver_id")
-    private User receiver;
+    private UserModel receiver;
     private LocalDateTime timeStamp;
 
 }

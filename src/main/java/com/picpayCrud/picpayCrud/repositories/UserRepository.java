@@ -1,12 +1,12 @@
 package com.picpayCrud.picpayCrud.repositories;
 
-import com.picpayCrud.picpayCrud.domain.user.User;
+import com.picpayCrud.picpayCrud.domain.user.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findUserByDocument(String document); //buscar usuario por cpf, pode ou nao retornar(optional)
+public interface UserRepository extends JpaRepository<UserModel, Long> {
+    Optional<UserModel> findUserByDocument(String document); //buscar usuario por cpf, pode ou nao retornar(optional)
 
-    Optional<User> findUserById(Long id);
+    Optional<UserModel> findUserById(Long id);
 }
