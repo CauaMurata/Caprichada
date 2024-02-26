@@ -4,7 +4,6 @@ import com.picpayCrud.picpayCrud.domain.transaction.Transaction;
 import com.picpayCrud.picpayCrud.domain.user.UserModel;
 import com.picpayCrud.picpayCrud.dtos.TransactionDTO;
 import com.picpayCrud.picpayCrud.repositories.TransactionRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

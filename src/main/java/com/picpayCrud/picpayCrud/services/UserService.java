@@ -2,11 +2,13 @@ package com.picpayCrud.picpayCrud.services;
 
 import com.picpayCrud.picpayCrud.domain.user.UserModel;
 import com.picpayCrud.picpayCrud.domain.user.UserType;
+import com.picpayCrud.picpayCrud.dtos.UserDTO;
 import com.picpayCrud.picpayCrud.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service //indicar para o spring que é uma classe de serviço para fazer as injeçoes de dependencias
 public class UserService {
@@ -24,6 +26,16 @@ public class UserService {
 
     public UserModel findUserById(Long id) throws Exception {
         return this.repository.findUserById(id).orElseThrow(() -> new Exception("Usuário não encontrado"));
+    }
+
+    public UserModel createUser(UserDTO data){
+        UserModel newUser = new UserModel(data);
+        this.saveUser(newUser);
+        return newUser;
+    }
+
+    public List<UserModel> getAllUsers(){
+        return this.repository.findAll();
     }
 
     public void saveUser(UserModel userModel){
