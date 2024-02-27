@@ -1,6 +1,6 @@
-package com.picpayCrud.picpayCrud.domain.transaction;
+package com.picpayCrud.picpayCrud.model.transaction;
 
-import com.picpayCrud.picpayCrud.domain.user.UserModel;
+import com.picpayCrud.picpayCrud.model.user.UserModel;
 import jakarta.persistence.*;
 import lombok.*;
 

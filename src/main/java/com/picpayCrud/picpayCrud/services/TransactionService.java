@@ -1,7 +1,7 @@
 package com.picpayCrud.picpayCrud.services;
 
-import com.picpayCrud.picpayCrud.domain.transaction.Transaction;
-import com.picpayCrud.picpayCrud.domain.user.UserModel;
+import com.picpayCrud.picpayCrud.model.transaction.Transaction;
+import com.picpayCrud.picpayCrud.model.user.UserModel;
 import com.picpayCrud.picpayCrud.dtos.TransactionDTO;
 import com.picpayCrud.picpayCrud.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,10 @@ public class TransactionService {
     private TransactionRepository repository;
     @Autowired
     private RestTemplate restTemplate; // classe que o spring oferece para fazer comunicações http entre serviços
+    @Autowired
+    private NotificationService notificationService;
 
-    public void createTransaction(TransactionDTO transaction) throws Exception {
+    public Transaction createTransaction(TransactionDTO transaction) throws Exception {
         UserModel sender = this.userService.findUserById(transaction.senderId());
         UserModel receiver = this.userService.findUserById(transaction.receiverId());
 
@@ -45,9 +47,14 @@ public class TransactionService {
         receiver.setBalance(receiver.getBalance().add(transaction.value())); // balance = balance + valor
 
         //salvar os dados
-        repository.save(newtransaction);
-        userService.saveUser(sender);
-        userService.saveUser(receiver);
+        this.repository.save(newtransaction);
+        this.userService.saveUser(sender);
+        this.userService.saveUser(receiver);
+
+        this.notificationService.sendNotification(sender,"Transação realizada com sucesso");
+        this.notificationService.sendNotification(receiver,"Transação recebida com sucesso");
+
+        return newtransaction;
     }
 
     public boolean authorizeTransaction(UserModel sender, BigDecimal value) {

@@ -1,6 +1,6 @@
 package com.picpayCrud.picpayCrud.repositories;
 
-import com.picpayCrud.picpayCrud.domain.user.UserModel;
+import com.picpayCrud.picpayCrud.model.user.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

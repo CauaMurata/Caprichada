@@ -1,6 +1,6 @@
 package com.picpayCrud.picpayCrud.dtos;
 
-import com.picpayCrud.picpayCrud.domain.user.UserType;
+import com.picpayCrud.picpayCrud.model.user.UserType;
 
 import java.math.BigDecimal;
 

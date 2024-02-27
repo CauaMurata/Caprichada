@@ -1,4 +1,4 @@
-package com.picpayCrud.picpayCrud.domain.user;
+package com.picpayCrud.picpayCrud.model.user;
 
 import com.picpayCrud.picpayCrud.dtos.UserDTO;
 import jakarta.persistence.*;
@@ -37,6 +37,7 @@ public class UserModel {
         this.balance = data.balance();
         this.userType = data.userType();
         this.password = data.password();
+        this.document = data.document();
         this.email = data.email();
     }
 }
