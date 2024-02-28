@@ -35,9 +35,10 @@ public class UserModel {
         this.firstName = data.firstName();
         this.lastName = data.lastName();
         this.balance = data.balance();
-        this.userType = data.userType();
+        this.userType = UserType.ACTIVE;
         this.password = data.password();
         this.document = data.document();
         this.email = data.email();
     }
+
 }

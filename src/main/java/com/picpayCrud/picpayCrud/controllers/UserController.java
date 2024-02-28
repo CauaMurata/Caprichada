@@ -16,19 +16,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserModel> createUser(@RequestBody UserDTO user) {
         UserModel newUser = userService.createUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/readAll")
     public ResponseEntity<List<UserModel>> getAllUsers() {
         List<UserModel> users = this.userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/read/{id}")
     public ResponseEntity<UserModel> getUserById(@PathVariable Long id) {
         try {
             UserModel user = this.userService.findUserById(id);
@@ -37,16 +37,16 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> inactivateUserById(@PathVariable Long id) {
         try {
-            String message = userService.deleteUserById(id);
+            String message = userService.inactivateUserById(id);
             return ResponseEntity.ok(message);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<UserModel> updateUser(@PathVariable Long id, @RequestBody UserModel newUser) {
         try {
             UserModel updatedUser = userService.updateUser(id, newUser);

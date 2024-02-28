@@ -35,20 +35,25 @@ public class UserService {
         return newUser;
     }
 
-    public String deleteUserById(Long id) throws Exception {
-        if (!repository.existsById(id)) {
+    public String inactivateUserById(Long id) throws Exception {
+        Optional<UserModel> userOptional = repository.findById(id);
+        if (userOptional.isPresent()) {
+            UserModel user = userOptional.get();
+            user.setUserType(UserType.INACTIVE);
+            repository.save(user);
+            return "Usuário com ID " + id + " foi inativado com sucesso.";
+        } else {
             throw new Exception("Usuário não encontrado");
         }
-        repository.deleteById(id);
-        return "Usuário com ID " + id + " foi deletado com sucesso.";
     }
+
+
 
     public UserModel updateUser(Long id, UserModel newUser) throws Exception {
         Optional<UserModel> existingUserOptional = repository.findById(id);
         if (existingUserOptional.isPresent()) {
             UserModel existingUser = existingUserOptional.get();
 
-            // Atualizar os campos permitidos se fornecidos
             if (newUser.getFirstName() != null) {
                 existingUser.setFirstName(newUser.getFirstName());
             }
@@ -64,10 +69,6 @@ public class UserService {
             if (newUser.getPassword() != null) {
                 existingUser.setPassword(newUser.getPassword());
             }
-            if (newUser.getUserType() != null) {
-                existingUser.setUserType(newUser.getUserType());
-            }
-            // Atualizar o saldo se fornecido
             if (newUser.getBalance() != null) {
                 existingUser.setBalance(newUser.getBalance());
             }
